@@ -5,6 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Access Token Generator for Pleroma API</title>
   <link rel="stylesheet" type="text/css" href="/css/site.css" />
+  <style>
+    html {
+      font-family: sans-serif;
+      background: white;
+    }
+
+    body {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #EEEEEE;
+      padding: 1rem 0.5rem;
+    }
+
+    h2 {
+      display: inline;
+    }
+
+    label {
+      display: inline-block;
+      width: 275px;
+      text-align: right;
+    }
+
+    input, select {
+      min-width: 145px;
+    }
+
+    small.small {
+      display: inline-block;
+      min-width: 275px;
+      text-align: right;
+    }
+
+    #form-result-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    #form-container {
+      grid-column-start: 1;
+    }
+
+    #result-container {
+      grid-column-start: 2;
+    }
+  </style>
 </head>
 <body>
   <h1>Access Token Generator for Pleroma API</h1>
