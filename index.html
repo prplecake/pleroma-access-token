@@ -124,35 +124,33 @@
             </div>
           </div>
 
-          <section class="section">
-            <details>
-              <summary><strong>About This Site</strong></summary>
-              <p>When you want to use Mastodon API, you need access_token for your application.  Using this site, you can get new access_token of your Mastodon site.</p>
-              <p>You can see all applications you use in Authorized Application of Settings.</p>
+          <details>
+            <summary><strong>About This Site</strong></summary>
+            <p>When you want to use Mastodon API, you need access_token for your application.  Using this site, you can get new access_token of your Mastodon site.</p>
+            <p>You can see all applications you use in Authorized Application of Settings.</p>
+            <p>
+              Originally by <a href="https://mstdn.jp/@takahashim">@takahashim</a>
+            </p>
+            <p>
+              The token generator has been rewritten, external dependencies removed,
+              by Matthew Jorgensen.
               <p>
-                Originally by <a href="https://mstdn.jp/@takahashim">@takahashim</a>
+                Source code:
+                <a href="https://git.sr.ht/~mjorgensen/pleroma-access-token">
+                  https://git.sr.ht/~mjorgensen/pleroma-access-token
+                </a>
+              </p>
+            </details>
+            <details>
+              <summary><strong>About Security</strong></summary>
+              <p>
+                This page uses your <b>client_id, client_secret and access_token</b>, but the site is pure JavaScript SPA site; <b>no server-side applications, no external scripts, no tracking your activities</b>.
               </p>
               <p>
-                The token generator has been rewritten, external dependencies removed,
-                by <a href="https://splat.soy/AstroBadger">@AstroBadger</a>
-                <p>
-                  Source code:
-                  <a href="https://git.sr.ht/~mjorgensen/pleroma-access-token">
-                    https://git.sr.ht/~mjorgensen/pleroma-access-token
-                  </a>
-                </p>
-              </details>
-              <details>
-                <summary><strong>About Security</strong></summary>
-                <p>
-                  This page uses your <b>client_id, client_secret and access_token</b>, but the site is pure JavaScript SPA site; <b>no server-side applications, no external scripts, no tracking your activities</b>.
-                </p>
-                <p>
-                  If you can't trust this site, you can copy this page and execute it anywhere.
-                  This page uses <a href="http://vanilla-js.com/">Vanilla JS</a>, so you can easily confirm what it does.
-                </p>
-              </details>
-            </section>
+                If you can't trust this site, you can copy this page and execute it anywhere.
+                This page uses <a href="http://vanilla-js.com/">Vanilla JS</a>, so you can easily confirm what it does.
+              </p>
+            </details>
             <script>
               function elem(el) {
                 return document.getElementById(el);
