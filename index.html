@@ -198,7 +198,7 @@
 		}
 
 		/* main */
-		var redirect_uri = window.location.protocol+"//"+window.location.host+"/";
+		var redirect_uri = window.location.protocol+"//"+window.location.host+window.location.pathname;
 		var pleroma_url = localStorage.getItem("PLEROMA_URL");
 		var client_id = localStorage.getItem("PLEROMA_CLIENT_ID");
 		var client_secret = localStorage.getItem("PLEROMA_CLIENT_SECRET");
