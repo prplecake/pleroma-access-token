@@ -165,9 +165,7 @@
 			Object.keys(args).forEach(function(key) {
 				data.push(encodeURIComponent(key) + '=' + encodeURIComponent(args[key]));
 			});
-			console.log(data)
 			rtn = data.join('&').replace(/%20/g, '+');
-			console.log(rtn)
 			return rtn
 		}
 
