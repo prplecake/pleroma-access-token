@@ -61,180 +61,185 @@
         <p>
           <label class="label" for="pleroma_url">Pleroma URL
             <input type="text" id="pleroma_url"
-            value="https://splat.soy" required></label><br />
-            <small class="small">(https://splat.soy, https://blob.cat, ...)</small>
-          </p>
-          <p>
-            <label class="label">Client Name
-              <input class="input is-primary" type="text" id="client_name" placeholder="sample-client" required></label>
-            </p>
-            <p>
-              <label class="label">Web site
-                <input class="input is-primary" type="text" id="website" placeholder="https://yourwebsite.host"></label>
-              </p>
-              <p class="control">
-                <label class="label">Scopes
-                  <span class="select">
-                    <select name="scopes" id="scopes">
-                      <option>read</option>
-                      <option>write</option>
-                      <option>follow</option>
-                      <option>read write</option>
-                      <option>read follow</option>
-                      <option>write follow</option>
-                      <option>read write follow</option>
-                    </select>
-                  </span></label>
-                </p>
+            value="https://jrgnsn.social" required>
+          </label><br />
+          <small class="small">(https://jrgnsn.social, https://blob.cat, ...)</small>
+        </p>
+        <p>
+          <label class="label">Client Name
+            <input class="input is-primary" type="text" id="client_name" placeholder="sample-client" required>
+          </label>
+        </p>
+        <p>
+          <label class="label">Web site
+            <input class="input is-primary" type="text" id="website" placeholder="https://yourwebsite.host">
+          </label>
+        </p>
+        <p class="control">
+          <label class="label">Scopes
+            <span class="select">
+              <select name="scopes" id="scopes">
+                <option>read</option>
+                <option>write</option>
+                <option>follow</option>
+                <option>read write</option>
+                <option>read follow</option>
+                <option>write follow</option>
+                <option>read write follow</option>
+              </select>
+            </span>
+          </label>
+        </p>
 
-                <p>
-                  <button class="button" type="submit" id="btn" name="btn">Publish access_token</button>
+        <p>
+          <button class="button" type="submit" id="btn" name="btn">Publish access_token</button>
 
-                  <button class="button is-primary is-outlined" type="button" id="btn_clr" name="btn_clr">clear tokens</button>
-                </p>
-              </form>
-            </div>
+          <button class="button is-primary is-outlined" type="button" id="btn_clr" name="btn_clr">clear tokens</button>
+        </p>
+      </form>
+    </div>
 
-            <div id="result-container">
+    <div id="result-container">
 
-              <h2>Result</h2>
+      <h2>Result</h2>
 
-              <div class="message-header">
-                <p>access_token</p>
-              </div>
-              <div class="message-body">
-                <p><span id="access_token"></span></p>
-              </div>
+      <div class="message-header">
+        <p>access_token</p>
+      </div>
+      <div class="message-body">
+        <p><span id="access_token"></span></p>
+      </div>
 
-              <div class="message-header">
-                <p>client_id &nbsp;<button id="btn_client_id" type="button" class="button is-small is-inverted">show</button></p>
-              </div>
-              <div class="message-body">
-                <p><span id="client_id" style="visibility:hidden;"></span></p>
-              </div>
+      <div class="message-header">
+        <p>client_id &nbsp;<button id="btn_client_id" type="button" class="button is-small is-inverted">show</button></p>
+      </div>
+      <div class="message-body">
+        <p><span id="client_id" style="visibility:hidden;"></span></p>
+      </div>
 
-              <div class="message-header">
-                <p>client_secret &nbsp;<button id="btn_client_secret" type="button" class="button is-small is-inverted">show</button></p>
-              </div>
-              <div class="message-body">
-                <p><span id="client_secret" style="visibility:hidden;"></span></p>
-              </div>
+      <div class="message-header">
+        <p>client_secret &nbsp;<button id="btn_client_secret" type="button" class="button is-small is-inverted">show</button></p>
+      </div>
+      <div class="message-body">
+        <p><span id="client_secret" style="visibility:hidden;"></span></p>
+      </div>
 
-            </div>
-          </div>
+    </div>
+  </div>
 
-          <details>
-            <summary><strong>About This Site</strong></summary>
-            <p>When you want to use Mastodon API, you need access_token for your application.  Using this site, you can get new access_token of your Mastodon site.</p>
-            <p>You can see all applications you use in Authorized Application of Settings.</p>
-            <p>
-              Originally by <a href="https://mstdn.jp/@takahashim">@takahashim</a>
-            </p>
-            <p>
-              The token generator has been rewritten, external dependencies removed,
-              by Matthew Jorgensen.
-              <p>
-                Source code:
-                <a href="https://git.sr.ht/~mjorgensen/pleroma-access-token">
-                  https://git.sr.ht/~mjorgensen/pleroma-access-token
-                </a>
-              </p>
-            </details>
-            <details>
-              <summary><strong>About Security</strong></summary>
-              <p>
-                This page uses your <b>client_id, client_secret and access_token</b>, but the site is pure JavaScript SPA site; <b>no server-side applications, no external scripts, no tracking your activities</b>.
-              </p>
-              <p>
-                If you can't trust this site, you can copy this page, or clone the repository, and host it locally any number of ways.
-                This page uses <a href="http://vanilla-js.com/">Vanilla JS</a>, so you can easily confirm what it does.
-              </p>
-            </details>
-            <script>
-              function elem(el) {
-                return document.getElementById(el);
-              }
-              function makePostData(args) {
-                var data = [];
-                Object.keys(args).forEach(function(key) {
-                  data.push(encodeURIComponent(key) + '=' + encodeURIComponent(args[key]));
-                });
-                return data.join('&').replace(/%20/g, '+');
-              }
-              function post(url, args, done) {
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                  if (xhr.readyState === 4 && xhr.status === 200) {
-                    var data = xhr.response;
-                    done(data);
-                  }
-                }
-                xhr.open("POST", url, true);
-                xhr.setRequestHeader("Content-Type" , "application/x-www-form-urlencoded");
-                xhr.responseType = "json";
-                var postData = makePostData(args);
-                xhr.send(postData);
-              }
+  <details>
+    <summary><strong>About This Site</strong></summary>
+    <p>When you want to use Mastodon API, you need access_token for your application.  Using this site, you can get new access_token of your Mastodon site.</p>
+    <p>You can see all applications you use in Authorized Application of Settings.</p>
+    <p>
+      Originally by <a href="https://mstdn.jp/@takahashim">@takahashim</a>
+    </p>
+    <p>
+      The token generator has been rewritten, external dependencies removed,
+      by Matthew Jorgensen.
+    </p>
+    <p>
+      Source code:
+      <a href="https://git.sr.ht/~mjorgensen/pleroma-access-token">
+        https://git.sr.ht/~mjorgensen/pleroma-access-token
+      </a>
+    </p>
+  </details>
+  <details>
+    <summary><strong>About Security</strong></summary>
+    <p>
+      This page uses your <b>client_id, client_secret and access_token</b>, but the site is pure JavaScript SPA site; <b>no server-side applications, no external scripts, no tracking your activities</b>.
+    </p>
+    <p>
+      If you can't trust this site, you can copy this page, or clone the repository, and host it locally any number of ways.
+      This page uses <a href="http://vanilla-js.com/">Vanilla JS</a>, so you can easily confirm what it does.
+    </p>
+  </details>
+  <script>
+    function elem(el) {
+      return document.getElementById(el);
+    }
+    function makePostData(args) {
+      var data = [];
+      Object.keys(args).forEach(function(key) {
+        data.push(encodeURIComponent(key) + '=' + encodeURIComponent(args[key]));
+      });
+      return data.join('&').replace(/%20/g, '+');
+    }
+    function post(url, args, done) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var data = xhr.response;
+          done(data);
+        }
+      }
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-Type" , "application/x-www-form-urlencoded");
+      xhr.responseType = "json";
+      var postData = makePostData(args);
+      xhr.send(postData);
+    }
 
-              /* main */
-              var redirect_uri = "https://takahashim.github.io/mastodon-access-token/";
-              var mastodon_url = localStorage.getItem("MASTODON_URL");
-              var client_id = localStorage.getItem("MASTODON_CLIENT_ID");
-              var client_secret = localStorage.getItem("MASTODON_CLIENT_SECRET");
+    /* main */
+    var redirect_uri = window.location;
+    var pleroma_url = localStorage.getItem("PLEROMA_URL");
+    var client_id = localStorage.getItem("PLEROMA_CLIENT_ID");
+    var client_secret = localStorage.getItem("PLEROMA_CLIENT_SECRET");
 
-              if (window.location.href.indexOf("?code=") !== -1 && mastodon_url != "" && client_id != "" && client_secret != "") {
-                var code = window.location.href.replace(window.location.origin+window.location.pathname+"?code=", "");
-                var url2 = mastodon_url+"/oauth/token";
-                elem("mastodon_url").value = mastodon_url;
-                elem("client_id").textContent = client_id;
-                elem("client_secret").textContent = client_secret;
-                var args2 = {client_id: client_id,
-                 client_secret: client_secret,
-                 redirect_uri: redirect_uri,
-                 grant_type: "authorization_code",
-                 code: code};
-                 post(url2, args2, function(data) {
-                  elem('access_token').textContent = data.access_token;
-                })
-               } else {
-                localStorage.setItem("MASTODON_URL", "");
-                localStorage.setItem("MASTODON_CLIENT_ID", "");
-                localStorage.setItem("MASTODON_CLIENT_SECRET", "");
-              }
+    if (window.location.href.indexOf("?code=") !== -1 && pleroma_url != "" && client_id != "" && client_secret != "") {
+      var code = window.location.href.replace(window.location.origin+window.location.pathname+"?code=", "");
+      var url2 = pleroma_url+"/oauth/token";
+      elem("pleroma_url").value = pleroma_url;
+      elem("client_id").textContent = client_id;
+      elem("client_secret").textContent = client_secret;
+      var args2 = {client_id: client_id,
+       client_secret: client_secret,
+       redirect_uri: redirect_uri,
+       grant_type: "authorization_code",
+       code: code};
+       post(url2, args2, function(data) {
+        elem('access_token').textContent = data.access_token;
+      })
+     } else {
+      localStorage.setItem("PLEROMA_URL", "");
+      localStorage.setItem("PLEROMA_CLIENT_ID", "");
+      localStorage.setItem("PLEROMA_CLIENT_SECRET", "");
+    }
 
-              elem("sbmt").addEventListener("submit", function(event) {
-                event.preventDefault();
-                var url = elem("mastodon_url").value+"/api/v1/apps";
-                var s = elem("scopes");
-                var scopes = s.options[s.selectedIndex].value;
-                var args = {client_name: elem("client_name").value,
-                redirect_uris: redirect_uri,
-                website: elem("website").value,
-                scopes: scopes};
-                post(url ,args, function(data) {
-                  localStorage.setItem("MASTODON_URL", elem("mastodon_url").value);
-                  localStorage.setItem("MASTODON_CLIENT_ID", data.client_id);
-                  localStorage.setItem("MASTODON_CLIENT_SECRET", data.client_secret);
-                  var redirectLink = elem("mastodon_url").value+"/oauth/authorize?client_id="+data.client_id+"&redirect_uri="+redirect_uri+"&response_type=code&scope=" + scopes;
-                  window.location.href = redirectLink;
-                });
-              });
+    elem("sbmt").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var url = elem("pleroma_url").value+"/api/v1/apps";
+      var s = elem("scopes");
+      var scopes = s.options[s.selectedIndex].value;
+      var args = {client_name: elem("client_name").value,
+      redirect_uris: redirect_uri,
+      website: elem("website").value,
+      scopes: scopes};
+      post(url ,args, function(data) {
+        localStorage.setItem("PLEROMA_URL", elem("pleroma_url").value);
+        localStorage.setItem("PLEROMA_CLIENT_ID", data.client_id);
+        localStorage.setItem("PLEROMA_CLIENT_SECRET", data.client_secret);
+        var redirectLink = elem("pleroma_url").value+"/oauth/authorize?client_id="+data.client_id+"&redirect_uri="+redirect_uri+"&response_type=code&scope=" + scopes;
+        window.location.href = redirectLink;
+      });
+    });
 
-              elem("btn_clr").addEventListener("click", function(event) {
-                elem('access_token').textContent = "";
-                elem('client_id').textContent = "";
-                elem('client_secret').textContent = "";
-                localStorage.setItem("MASTODON_URL", "");
-                localStorage.setItem("MASTODON_CLIENT_ID", "");
-                localStorage.setItem("MASTODON_CLIENT_SECRET", "");
-              });
+    elem("btn_clr").addEventListener("click", function(event) {
+      elem('access_token').textContent = "";
+      elem('client_id').textContent = "";
+      elem('client_secret').textContent = "";
+      localStorage.setItem("PLEROMA_URL", "");
+      localStorage.setItem("PLEROMA_CLIENT_ID", "");
+      localStorage.setItem("PLEROMA_CLIENT_SECRET", "");
+    });
 
-              elem("btn_client_secret").addEventListener("click", function(event) {
-                elem("client_secret").style.visibility = "visible";
-              });
-              elem("btn_client_id").addEventListener("click", function(event) {
-                elem("client_id").style.visibility = "visible";
-              });
-            </script>
-          </body>
-          </html>
+    elem("btn_client_secret").addEventListener("click", function(event) {
+      elem("client_secret").style.visibility = "visible";
+    });
+    elem("btn_client_id").addEventListener("click", function(event) {
+      elem("client_id").style.visibility = "visible";
+    });
+  </script>
+</body>
+</html>
