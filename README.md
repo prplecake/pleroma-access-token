@@ -16,4 +16,4 @@ Bugs and issues are tracked in the tracker:
 [~mjorgensen/pleroma-access-token][todo].
 
 [lists]:https://lists.sr.ht/~mjorgensen/public-inbox
-[todo]:https://todo.sr.ht/~mjorgensen/pleroma-acess-token
+[todo]:https://todo.sr.ht/~mjorgensen/pleroma-access-token
