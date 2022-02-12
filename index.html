@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Access Token Generator for Pleroma API</title>
+	<title>Access Token Generator for Fediverse APIs</title>
 	<style>
 		html {
 			font-family: sans-serif;
@@ -52,15 +52,15 @@
 	</style>
 </head>
 <body>
-	<h1>Access Token Generator for Pleroma API</h1>
+	<h1>Access Token Generator for Fediverse APIs</h1>
 
 	<div id="form-result-container">
 		<div id="form-container">
 			<h2>Form</h2>
 			<form method="post" action="#" id="sbmt">
 				<p>
-					<label class="label" for="pleroma_url">Pleroma URL
-						<input type="text" id="pleroma_url"
+					<label class="label" for="instance_url">Instance URL
+						<input type="text" id="instance_url"
 						value="https://" required>
 					</label><br />
 					<small class="small">(https://mastodon.social, https://freeradical.zone, ...)</small>
@@ -130,26 +130,21 @@
 	<details>
 		<summary><strong>About This Site</strong></summary>
 		<p>When you want to use Mastodon API, you need access_token for your application.  Using this site, you can get new access_token of your Mastodon site.</p>
-		<p>You can see all applications you use in Authorized Application of Settings.</p>
+		<p>You can see all applications you've authorized in your account's <strong>Authorized apps</strong> settings.</p>
 		<p>
-			Originally by <a href="https://mstdn.jp/@takahashim">@takahashim</a>
-		</p>
-		<p>
-			The token generator has been rewritten with external dependencies
-			removed by Matthew Jorgensen.
-			(<a href="https://freeradical.zone/@prplecake">@prplecake@freeradical.zone</a>)
+			Maintained by <a href="https://freeradical.zone/@prplecake">@prplecake@freeradical.zone</a>
 		</p>
 		<p>
 			Source code:
-			<a href="https://github.com/prplecake/pleroma-access-token">
-				https://github.com/prplecake/pleroma-access-token
+			<a href="https://github.com/prplecake/fediverse-access-token">
+				https://github.com/prplecake/fediverse-access-token
 			</a>
 		</p>
 	</details>
 	<details>
 		<summary><strong>About Security</strong></summary>
 		<p>
-			This page uses your <strong>client_id, client_secret and access_token</strong>, but the site is pure JavaScript SPA site; <strong>no server-side applications, no external scripts, no tracking your activities</strong>.
+			This page uses your <strong>client_id, client_secret and access_token</strong>, but the site is a pure JavaScript SPA site; <strong>no server-side applications, no external scripts, no tracking your activities</strong>.
 		</p>
 		<p>
 			If you can't trust this site, you can copy this page, or clone the repository, and host it locally any number of ways.
@@ -198,14 +193,14 @@
 
 		/* main */
 		var redirect_uri = window.location.protocol+"//"+window.location.host+window.location.pathname;
-		var pleroma_url = localStorage.getItem("PLEROMA_URL");
-		var client_id = localStorage.getItem("PLEROMA_CLIENT_ID");
-		var client_secret = localStorage.getItem("PLEROMA_CLIENT_SECRET");
+		var instance_url = localStorage.getItem("INSTANCE_URL");
+		var client_id = localStorage.getItem("INSTANCE_CLIENT_ID");
+		var client_secret = localStorage.getItem("INSTANCE_CLIENT_SECRET");
 
-		if (window.location.href.indexOf("?code=") !== -1 && pleroma_url != "" && client_id != "" && client_secret != "") {
+		if (window.location.href.indexOf("?code=") !== -1 && instance_url != "" && client_id != "" && client_secret != "") {
 			var code = getQueryVariable("code");
-			var url2 = pleroma_url+"/oauth/token";
-			elem("pleroma_url").value = pleroma_url;
+			var url2 = instance_url+"/oauth/token";
+			elem("instance_url").value = instance_url;
 			elem("client_id").textContent = client_id;
 			elem("client_secret").textContent = client_secret;
 			var args2 = {client_id: client_id,
@@ -217,14 +212,14 @@
 					elem('access_token').textContent = data.access_token;
 				})
 			} else {
-				localStorage.setItem("PLEROMA_URL", "");
-				localStorage.setItem("PLEROMA_CLIENT_ID", "");
-				localStorage.setItem("PLEROMA_CLIENT_SECRET", "");
+				localStorage.setItem("INSTANCE_URL", "");
+				localStorage.setItem("INSTANCE_CLIENT_ID", "");
+				localStorage.setItem("INSTANCE_CLIENT_SECRET", "");
 			}
 
 			elem("sbmt").addEventListener("submit", function(event) {
 				event.preventDefault();
-				var url = elem("pleroma_url").value+"/api/v1/apps";
+				var url = elem("instance_url").value+"/api/v1/apps";
 				var s = elem("scopes");
 				var scopes = s.options[s.selectedIndex].value;
 				var args = {client_name: elem("client_name").value,
@@ -232,10 +227,10 @@
 				website: elem("website").value,
 				scopes: scopes};
 				post(url ,args, function(data) {
-					localStorage.setItem("PLEROMA_URL", elem("pleroma_url").value);
-					localStorage.setItem("PLEROMA_CLIENT_ID", data.client_id);
-					localStorage.setItem("PLEROMA_CLIENT_SECRET", data.client_secret);
-					var redirectLink = elem("pleroma_url").value+"/oauth/authorize?client_id="+data.client_id+"&redirect_uri="+redirect_uri+"&response_type=code&scope=" + scopes;
+					localStorage.setItem("INSTANCE_URL", elem("instance_url").value);
+					localStorage.setItem("INSTANCE_CLIENT_ID", data.client_id);
+					localStorage.setItem("INSTANCE_CLIENT_SECRET", data.client_secret);
+					var redirectLink = elem("instance_url").value+"/oauth/authorize?client_id="+data.client_id+"&redirect_uri="+redirect_uri+"&response_type=code&scope=" + scopes;
 					window.location.href = redirectLink;
 				});
 			});
@@ -244,9 +239,9 @@
 				elem('access_token').textContent = "";
 				elem('client_id').textContent = "";
 				elem('client_secret').textContent = "";
-				localStorage.setItem("PLEROMA_URL", "");
-				localStorage.setItem("PLEROMA_CLIENT_ID", "");
-				localStorage.setItem("PLEROMA_CLIENT_SECRET", "");
+				localStorage.setItem("INSTANCE_URL", "");
+				localStorage.setItem("INSTANCE_CLIENT_ID", "");
+				localStorage.setItem("INSTANCE_CLIENT_SECRET", "");
 			});
 
 			elem("btn_client_secret").addEventListener("click", function(event) {
