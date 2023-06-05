@@ -50,6 +50,8 @@
 			grid-column-start: 2;
 		}
 	</style>
+	<script src="https://cdn.usefathom.com/script.js" data-site="HOYQYQEM" data-included-domains="prplecake.github.io"
+		defer></script>
 </head>
 <body>
 	<h1>Access Token Generator for Pleroma API</h1>
@@ -209,47 +211,47 @@
 				grant_type: "authorization_code",
 				code: code};
 				post(url2, args2, function(data) {
-					elem('access_token').textContent = data.access_token;
-				})
-			} else {
-				localStorage.setItem("INSTANCE_URL", "");
-				localStorage.setItem("INSTANCE_CLIENT_ID", "");
-				localStorage.setItem("INSTANCE_CLIENT_SECRET", "");
-			}
+				elem('access_token').textContent = data.access_token;
+			})
+		} else {
+			localStorage.setItem("INSTANCE_URL", "");
+			localStorage.setItem("INSTANCE_CLIENT_ID", "");
+			localStorage.setItem("INSTANCE_CLIENT_SECRET", "");
+		}
 
 			elem("sbmt").addEventListener("submit", function(event) {
-				event.preventDefault();
+			event.preventDefault();
 				var url = elem("instance_url").value+"/api/v1/apps";
-				var s = elem("scopes");
-				var scopes = s.options[s.selectedIndex].value;
+			var s = elem("scopes");
+			var scopes = s.options[s.selectedIndex].value;
 				var args = {client_name: elem("client_name").value,
 				redirect_uris: redirect_uri,
 				website: elem("website").value,
 				scopes: scopes};
 				post(url ,args, function(data) {
-					localStorage.setItem("INSTANCE_URL", elem("instance_url").value);
-					localStorage.setItem("INSTANCE_CLIENT_ID", data.client_id);
-					localStorage.setItem("INSTANCE_CLIENT_SECRET", data.client_secret);
+				localStorage.setItem("INSTANCE_URL", elem("instance_url").value);
+				localStorage.setItem("INSTANCE_CLIENT_ID", data.client_id);
+				localStorage.setItem("INSTANCE_CLIENT_SECRET", data.client_secret);
 					var redirectLink = elem("instance_url").value+"/oauth/authorize?client_id="+data.client_id+"&redirect_uri="+redirect_uri+"&response_type=code&scope=" + scopes;
-					window.location.href = redirectLink;
-				});
+				window.location.href = redirectLink;
 			});
+		});
 
 			elem("btn_clr").addEventListener("click", function(event) {
-				elem('access_token').textContent = "";
-				elem('client_id').textContent = "";
-				elem('client_secret').textContent = "";
-				localStorage.setItem("INSTANCE_URL", "");
-				localStorage.setItem("INSTANCE_CLIENT_ID", "");
-				localStorage.setItem("INSTANCE_CLIENT_SECRET", "");
-			});
+			elem('access_token').textContent = "";
+			elem('client_id').textContent = "";
+			elem('client_secret').textContent = "";
+			localStorage.setItem("INSTANCE_URL", "");
+			localStorage.setItem("INSTANCE_CLIENT_ID", "");
+			localStorage.setItem("INSTANCE_CLIENT_SECRET", "");
+		});
 
 			elem("btn_client_secret").addEventListener("click", function(event) {
-				elem("client_secret").style.visibility = "visible";
-			});
+			elem("client_secret").style.visibility = "visible";
+		});
 			elem("btn_client_id").addEventListener("click", function(event) {
-				elem("client_id").style.visibility = "visible";
-			});
+			elem("client_id").style.visibility = "visible";
+		});
 	</script>
 </body>
 </html>
