@@ -188,7 +188,7 @@
 			const vars = query.split("&");
 			for (let i=0; i<vars.length; i++) {
 				const pair = vars[i].split("=");
-				if(pair[0] == variable){return pair[1];}
+				if(pair[0] === variable){return pair[1];}
 			}
 			return(false);
 		}
@@ -199,7 +199,7 @@
 		const client_id = localStorage.getItem("INSTANCE_CLIENT_ID");
 		const client_secret = localStorage.getItem("INSTANCE_CLIENT_SECRET");
 
-		if (window.location.href.indexOf("?code=") !== -1 && instance_url != "" && client_id != "" && client_secret != "") {
+		if (window.location.href.indexOf("?code=") !== -1 && instance_url !== "" && client_id !== "" && client_secret !== "") {
 			const code = getQueryVariable("code");
 			const url2 = instance_url + "/oauth/token";
 			elem("instance_url").value = instance_url;
