@@ -164,8 +164,7 @@
 			Object.keys(args).forEach(function(key) {
 				data.push(encodeURIComponent(key) + '=' + encodeURIComponent(args[key]));
 			});
-			rtn = data.join('&').replace(/%20/g, '+');
-			return rtn
+			return data.join('&').replace(/%20/g, '+')
 		}
 
 		function post(url, args, done) {
@@ -237,8 +236,7 @@
 				localStorage.setItem("INSTANCE_URL", elem("instance_url").value);
 				localStorage.setItem("INSTANCE_CLIENT_ID", data.client_id);
 				localStorage.setItem("INSTANCE_CLIENT_SECRET", data.client_secret);
-					const redirectLink = elem("instance_url").value + "/oauth/authorize?client_id=" + data.client_id + "&redirect_uri=" + redirect_uri + "&response_type=code&scope=" + scopes;
-					window.location.href = redirectLink;
+					window.location.href = elem("instance_url").value + "/oauth/authorize?client_id=" + data.client_id + "&redirect_uri=" + redirect_uri + "&response_type=code&scope=" + scopes;
 			});
 		});
 
